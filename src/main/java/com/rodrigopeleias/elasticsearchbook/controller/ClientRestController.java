@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -16,7 +17,8 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@RestController("/api/cliente")
+@RestController
+@RequestMapping("/api/cliente")
 public class ClientRestController {
 
     public static long contadorErroCaotico;
@@ -60,7 +62,7 @@ public class ClientRestController {
         return clientes.values();
     }
 
-    @GetMapping("/api/cliente/{id}")
+    @GetMapping("/{id}")
     public Cliente getCliente(@PathVariable("id") long id) {
         Optional<Cliente> optCliente = clientes.values()
                 .stream()
@@ -96,7 +98,7 @@ public class ClientRestController {
         temp.setEmail(cliente.getEmail());
     }
 
-    @DeleteMapping("/api/cliente/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") long id) {
         log.info("O cliente " + id + "foi excluído");
         clientes.remove(id);
